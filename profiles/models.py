@@ -15,7 +15,7 @@ class Profile(models.Model):
     private = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user
+        return self.user.__str__()
 
     @property
     def is_private(self):
