@@ -35,7 +35,7 @@ User = get_user_model()
 class ProfileAPIView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         obj = get_object_or_404(User, id=self.request.user.id)
@@ -48,7 +48,7 @@ class ProfileAPIView(RetrieveUpdateDestroyAPIView):
 class ProfileDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     lookup_url_kwarg = "id"
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_serializer_class(self):
         user = self.request.user

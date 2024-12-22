@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 from .models import Relation
 
@@ -9,6 +9,14 @@ def map_state(action):
         return Relation.RelationChoices.FOLLOWS
     elif action == 'block':
         return Relation.RelationChoices.BLOCKS
+
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method not in SAFE_METHODS:
+            return request.user == obj
+
+        return True
 
 
 class NotIdentical(BasePermission):
