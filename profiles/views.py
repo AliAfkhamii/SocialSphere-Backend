@@ -112,5 +112,3 @@ class ActionViewSet(GenericViewSet, ViewSetMixin):
         user = self.get_object()
         Relation.objects.decline(request.user, user)
         return Response({"message": f"follow request declined"}, status=HTTP_200_OK)
-
-
