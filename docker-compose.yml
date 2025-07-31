@@ -1,0 +1,34 @@
+services:
+
+  socialsphere:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: social_sphere_backend
+    ports:
+      - "${PORT:-8000}:8000"
+    depends_on:
+      - db
+    env_file: .env
+    volumes:
+      - .:/app
+    entrypoint: ["/scripts/wait-for-db.sh"]
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  db:
+    image: postgres:15
+    container_name: social-sphere-db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - socialsphere_pgdata:/var/lib/postgresql/data
+
+volumes:
+  socialsphere_pgdata:

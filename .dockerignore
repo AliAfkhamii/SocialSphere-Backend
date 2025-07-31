@@ -1,0 +1,80 @@
+# ----------------------------
+# Python artifacts
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.egg
+
+# ----------------------------
+# PyCharm/IDE/editor settings
+# ----------------------------
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------
+# OS / metadata / logs
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# ----------------------------
+# Git / CI / tooling
+# ----------------------------
+.git/
+.gitignore
+.gitattributes
+*.patch
+
+# ----------------------------
+# Docker / Build / Deploy
+# ----------------------------
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# ----------------------------
+# Tests / coverage
+# ----------------------------
+.coverage
+.tox/
+.nox/
+htmlcov/
+.pytest_cache/
+.coverage.*
+.cache/
+tests/__pycache__/
+
+# ----------------------------
+# Environment and secrets
+# ----------------------------
+.env
+.env.*
+*.env
+secrets/
+config/settings/local.py
+
+# ----------------------------
+# DB / media / uploads (runtime-generated)
+# ----------------------------
+*.sqlite3
+media/
+staticfiles/
+db.sqlite3
+
+!scripts

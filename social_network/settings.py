@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -19,7 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ce4b2y-st59*ahhsuqu+-jt(tzeg-4xoa5_$d_78@m&g0j&3=5"
+SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-insecure-key")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,8 +79,12 @@ WSGI_APPLICATION = "social_network.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'social_db'),
+        'USER': os.environ.get('DB_USER', 'social_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'supersecure'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
